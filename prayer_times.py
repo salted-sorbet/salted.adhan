@@ -66,7 +66,7 @@ if __name__ == "__main__":
     pt = PrayTimes('Egypt')
     times = pt.getTimes(script_date, coordinates, 1)
     
-    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prayer_times.txt")
+    output_path = os.path.join(CONFIG_DIR, "prayer_times.txt")
     with open(output_path, "w") as f:
         for i in ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']:
             f.write(f"{times[i.lower()]}\n")

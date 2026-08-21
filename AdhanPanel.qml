@@ -14,7 +14,8 @@ Panel {
   property var anchorItem: null
   property var hostWidget: null
   readonly property var barIdentity: hostWidget || root
-  readonly property string pluginDir: Quickshell.env("HOME") + "/.config/omarchy/plugins/salted.adhan"
+  readonly property string pluginDir: Quickshell.env("HOME") + "/.config/omarchy/salted.adhan"
+  readonly property string timesPath: Quickshell.env("HOME") + "/.config/omarchy/salted.adhan/prayer_times.txt"
 
   property var prayerTimes: []
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
@@ -30,7 +31,7 @@ Panel {
 
   FileView {
     id: timesFile
-    path: root.pluginDir + "/prayer_times.txt"
+    path: root.timesPath
     watchChanges: false
     printErrors: false
     onLoaded: {
@@ -43,7 +44,7 @@ Panel {
 
   Process {
     id: scriptProc
-    command: ["python3", root.pluginDir + "/prayer_times.py"]
+    command: ["python3", Quickshell.env("HOME") + "/.config/omarchy/plugins/salted.adhan/prayer_times.py"]
     onExited: function(exitCode) {
       refreshing = false
       if (exitCode === 0) timesFile.reload()
