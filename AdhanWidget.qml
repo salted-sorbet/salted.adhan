@@ -12,12 +12,14 @@ BarWidget {
     id: button
     anchors.fill: parent
     bar: root.bar
-    text: "🕌"
+    text: "\uf06d"
     tooltipText: "Adhan - Prayer Times"
     onPressed: root.togglePanel()
   }
 
   function togglePanel() {
-    // TODO: Open popup panel
+    if (root.bar) {
+      root.bar.requestPopout(root)
+    }
   }
 }
