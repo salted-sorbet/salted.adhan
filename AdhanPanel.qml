@@ -2,17 +2,16 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
 import qs.Ui
+import qs.Commons
 
-PanelWidget {
+Panel {
   id: root
   moduleName: "salted.adhan"
+  ipcTarget: "salted.adhan"
 
   readonly property string timesFile: OmarchyPath + "/plugins/salted.adhan/prayer_times.txt"
   property var prayerTimes: []
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
-
-  implicitWidth: 280
-  implicitHeight: 320
 
   Component.onCompleted: refreshTimes()
 
@@ -40,9 +39,12 @@ PanelWidget {
     }
   }
 
+  contentWidth: fittedContentWidth(Style.space(280))
+  contentHeight: fittedContentHeight(column.implicitHeight, Style.space(320))
+
   ColumnLayout {
-    anchors.fill: parent
-    anchors.margins: 16
+    id: column
+    width: parent.width
     spacing: 12
 
     // Header

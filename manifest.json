@@ -5,9 +5,15 @@
   "version": "1.0.0",
   "author": "salted-sorbet",
   "description": "Adhan prayer times widget with popup panel",
-  "kinds": ["bar-widget", "panel"],
+  "kinds": ["bar-widget"],
   "entryPoints": {
-    "bar-widget": "AdhanWidget.qml",
-    "panel": "AdhanPanel.qml"
+    "barWidget": "AdhanWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Adhan",
+    "description": "Prayer times widget",
+    "category": "Utilities",
+    "allowMultiple": false,
+    "defaultSection": "right"
   }
 }
