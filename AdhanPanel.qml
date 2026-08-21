@@ -12,6 +12,7 @@ Panel {
 
   property var anchorItem: null
   property var hostWidget: null
+  property string omarchyPath: ""
   readonly property var barIdentity: hostWidget || root
   readonly property color fg: bar ? bar.barForeground : "white"
 
