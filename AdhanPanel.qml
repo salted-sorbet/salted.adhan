@@ -8,6 +8,11 @@ Panel {
   id: root
   moduleName: "salted.adhan"
   ipcTarget: "salted.adhan"
+  manageIpc: false
+
+  property var anchorItem: null
+  property var hostWidget: null
+  readonly property var barIdentity: hostWidget || root
 
   readonly property string scriptPath: Qt.resolvedUrl("prayer_times.py").toString().replace("file://", "")
   readonly property string timesPath: Qt.resolvedUrl("prayer_times.txt").toString().replace("file://", "")
@@ -48,7 +53,6 @@ Panel {
     width: parent.width
     spacing: 12
 
-    // Header
     Text {
       Layout.fillWidth: true
       text: "Prayer Times"
@@ -66,7 +70,6 @@ Panel {
       horizontalAlignment: Text.AlignHCenter
     }
 
-    // Divider
     Rectangle {
       Layout.fillWidth: true
       Layout.topMargin: 4
@@ -76,7 +79,6 @@ Panel {
       opacity: 0.3
     }
 
-    // Prayer times list
     Repeater {
       model: root.prayerNames
 
@@ -102,7 +104,6 @@ Panel {
 
     Item { Layout.fillHeight: true }
 
-    // Refresh button
     Rectangle {
       Layout.fillWidth: true
       Layout.preferredHeight: 32
