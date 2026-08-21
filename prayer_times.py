@@ -63,7 +63,7 @@ def get_coordinates():
 if __name__ == "__main__":
     script_date = date.today()
     coordinates = get_coordinates()
-    pt = PrayTimes('Egypt')
+    pt = PrayTimes('MWL')
     times = pt.getTimes(script_date, coordinates, 1)
     
     output_path = os.path.join(CONFIG_DIR, "prayer_times.txt")
