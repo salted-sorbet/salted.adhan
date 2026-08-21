@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 import qs.Ui
 
@@ -63,5 +64,19 @@ BarWidget {
     text: "A"
     tooltipText: "Adhan - Prayer Times"
     onPressed: root.togglePanel()
+  }
+
+  Timer {
+    id: notifyTimer
+    interval: 30000
+    running: true
+    repeat: true
+    triggeredOnStart: true
+    onTriggered: notifyProc.running = true
+  }
+
+  Process {
+    id: notifyProc
+    command: ["python3", Quickshell.env("HOME") + "/.config/omarchy/plugins/salted.adhan/notify.py"]
   }
 }
