@@ -21,6 +21,10 @@ Panel {
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
   property bool refreshing: false
 
+  function sanitize(str) {
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;")
+  }
+
   Component.onCompleted: refreshTimes()
 
   function refreshTimes() {
@@ -78,7 +82,7 @@ Panel {
 
       Text {
         Layout.fillWidth: true
-        text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
+        text: root.sanitize(Qt.formatDateTime(new Date(), "dddd, MMMM d"))
         textFormat: Text.PlainText
         color: bar ? Qt.darker(bar.barForeground, 1.3) : "gray"
         font.pixelSize: 12
@@ -102,7 +106,7 @@ Panel {
           spacing: 8
 
           Text {
-            text: modelData
+            text: root.sanitize(modelData)
             textFormat: Text.PlainText
             color: bar ? bar.barForeground : "white"
             font.pixelSize: 14
@@ -110,7 +114,7 @@ Panel {
           }
 
           Text {
-            text: root.prayerTimes[index] || "--:--"
+            text: root.sanitize(root.prayerTimes[index] || "--:--")
             textFormat: Text.PlainText
             color: bar ? bar.barForeground : "white"
             font.pixelSize: 14
@@ -131,7 +135,7 @@ Panel {
 
         Text {
           anchors.centerIn: parent
-          text: root.refreshing ? "Updating..." : "Refresh"
+          text: root.sanitize(root.refreshing ? "Updating..." : "Refresh")
           textFormat: Text.PlainText
           color: bar ? bar.barForeground : "white"
           font.pixelSize: 12
