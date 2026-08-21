@@ -28,7 +28,7 @@ def get_location_from_ip():
 def get_timezone_offset():
     """Get local timezone offset from UTC in hours."""
     now = datetime.now(timezone.utc)
-    local = datetime.now()
+    local = now.astimezone()
     offset = local.utcoffset()
     if offset is not None:
         return offset.total_seconds() / 3600
