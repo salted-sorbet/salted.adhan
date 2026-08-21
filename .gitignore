@@ -1,2 +1,5 @@
 *.bak
 *.bak.bak
+__pycache__/
+*.pyc
+prayer_times.txt
