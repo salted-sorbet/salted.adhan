@@ -60,7 +60,7 @@ BarWidget {
     id: button
     anchors.fill: parent
     bar: root.bar
-    text: "\uf06d"
+    text: "\uf017"
     tooltipText: "Adhan - Prayer Times"
     onPressed: root.togglePanel()
   }
