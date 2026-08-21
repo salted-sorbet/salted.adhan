@@ -36,7 +36,7 @@ Panel {
     onLoaded: {
       var content = text()
       if (content.trim().length > 0) {
-        root.prayerTimes = text.trim().split("\n")
+        root.prayerTimes = content.trim().split("\n")
       }
     }
   }
