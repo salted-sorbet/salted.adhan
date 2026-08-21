@@ -13,7 +13,7 @@ Panel {
   property var anchorItem: null
   property var hostWidget: null
   readonly property var barIdentity: hostWidget || root
-  readonly property color fg: bar ? bar.barForeground : Color.foreground
+  readonly property color fg: bar ? bar.barForeground : "white"
 
   property var prayerTimes: []
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
