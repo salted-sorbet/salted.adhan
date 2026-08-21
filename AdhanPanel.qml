@@ -9,7 +9,8 @@ Panel {
   moduleName: "salted.adhan"
   ipcTarget: "salted.adhan"
 
-  readonly property string timesFile: OmarchyPath + "/plugins/salted.adhan/prayer_times.txt"
+  readonly property string scriptPath: Qt.resolvedUrl("prayer_times.py").toString().replace("file://", "")
+  readonly property string timesPath: Qt.resolvedUrl("prayer_times.txt").toString().replace("file://", "")
   property var prayerTimes: []
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
 
@@ -21,7 +22,7 @@ Panel {
 
   Process {
     id: refreshProc
-    command: ["python3", OmarchyPath + "/plugins/salted.adhan/prayer_times.py"]
+    command: ["python3", root.scriptPath]
     onExited: function(exitCode) {
       if (exitCode === 0) readFileProc.running = true
     }
@@ -29,7 +30,7 @@ Panel {
 
   Process {
     id: readFileProc
-    command: ["cat", root.timesFile]
+    command: ["cat", root.timesPath]
     stdout: StdioCollector {
       waitForEnd: true
       onStreamFinished: {
