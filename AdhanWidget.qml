@@ -1,6 +1,5 @@
 import QtQuick
 import qs.Ui
-import qs.Commons
 
 BarWidget {
   id: root
@@ -60,7 +59,7 @@ BarWidget {
     id: button
     anchors.fill: parent
     bar: root.bar
-    text: "\uf017"
+    text: "🕐"
     tooltipText: "Adhan - Prayer Times"
     onPressed: root.togglePanel()
   }
