@@ -12,7 +12,8 @@ def get_location_from_ip():
     """Get coordinates from IP geolocation."""
     try:
         with urllib.request.urlopen("https://ip-api.com/json/", timeout=5) as response:
-            data = json.loads(response.read().decode())
+            data = response.read(1024)  # Limit to 1KB
+            data = json.loads(data.decode())
             if data.get("status") == "success":
                 lat = float(data.get("lat", 0))
                 lon = float(data.get("lon", 0))

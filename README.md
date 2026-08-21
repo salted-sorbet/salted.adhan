@@ -30,6 +30,21 @@ Add to your shell layout:
 }
 ```
 
+## Removal
+
+1. Remove from your shell layout in `~/.config/omarchy/shell.json`
+2. Uninstall the plugin:
+
+```bash
+omarchy plugin uninstall salted.adhan
+```
+
+3. Remove config (optional):
+
+```bash
+rm -rf ~/.config/omarchy/salted.adhan
+```
+
 ## Usage
 
 - The widget displays "A" in the bar
