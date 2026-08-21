@@ -31,13 +31,12 @@ Panel {
   FileView {
     id: timesFile
     path: root.pluginDir + "/prayer_times.txt"
-    watchChanges: true
+    watchChanges: false
     printErrors: false
-    onFileChanged: reload()
     onLoaded: {
       var content = text()
       if (content.trim().length > 0) {
-        root.prayerTimes = content.trim().split("\n")
+        root.prayerTimes = text.trim().split("\n")
       }
     }
   }
