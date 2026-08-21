@@ -1,5 +1,7 @@
 # Salted Adhan
 
+![Preview](preview.png)
+
 Prayer times widget with popup panel for [Omarchy](https://omarchylinux.com).
 
 ## Features
