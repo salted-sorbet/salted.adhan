@@ -63,7 +63,7 @@ def get_coordinates():
 if __name__ == "__main__":
     script_date = date.today()
     coordinates = get_coordinates()
-    times = prayTimes.getTimes(script_date, coordinates, 1)
+    times = prayTimes.getTimes(script_date, coordinates, 1, 'Egypt')
     
     with open("prayer_times.txt", "w") as f:
         for i in ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']:
