@@ -49,7 +49,7 @@ To manually set coordinates, edit `config.json`:
 
 ```json
 {
-  "coordinates": [36.7377, 3.0839, 0]
+  "coordinates": [48.8566, 2.3522, 0]
 }
 ```
 
