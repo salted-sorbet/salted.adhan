@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "salted.adhan",
+  "name": "Salted Adhan",
+  "version": "1.0.0",
+  "author": "salted-sorbet",
+  "description": "Adhan prayer times widget with popup panel",
+  "kinds": ["bar-widget", "panel"],
+  "entryPoints": {
+    "bar-widget": "AdhanWidget.qml",
+    "panel": "AdhanPanel.qml"
+  }
+}
