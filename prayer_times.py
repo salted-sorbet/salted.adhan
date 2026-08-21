@@ -65,8 +65,9 @@ if __name__ == "__main__":
     coordinates = get_coordinates()
     times = prayTimes.getTimes(script_date, coordinates, 1, 'Egypt')
     
-    with open("prayer_times.txt", "w") as f:
+    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prayer_times.txt")
+    with open(output_path, "w") as f:
         for i in ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']:
             f.write(f"{times[i.lower()]}\n")
             
-    print("Prayer times successfully saved to prayer_times.txt!")
+    print("Prayer times successfully saved to " + output_path)

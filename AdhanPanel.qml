@@ -18,10 +18,13 @@ Panel {
 
   property var prayerTimes: []
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
+  property bool refreshing: false
 
   Component.onCompleted: refreshTimes()
 
   function refreshTimes() {
+    if (refreshing) return
+    refreshing = true
     scriptProc.running = true
   }
 
@@ -43,6 +46,7 @@ Panel {
     id: scriptProc
     command: ["python3", root.pluginDir + "/prayer_times.py"]
     onExited: function(exitCode) {
+      refreshing = false
       if (exitCode === 0) timesFile.reload()
     }
   }
@@ -117,13 +121,13 @@ Panel {
         Layout.fillWidth: true
         Layout.preferredHeight: 32
         radius: 6
-        color: refreshMouse.containsMouse ? (bar ? Qt.darker(bar.barForeground, 1.2) : "gray") : "transparent"
+        color: refreshMouse.containsMouse || root.refreshing ? (bar ? Qt.darker(bar.barForeground, 1.2) : "gray") : "transparent"
         border.color: bar ? Qt.darker(bar.barForeground, 1.5) : "gray"
         border.width: 1
 
         Text {
           anchors.centerIn: parent
-          text: "Refresh"
+          text: root.refreshing ? "Updating..." : "Refresh"
           color: bar ? bar.barForeground : "white"
           font.pixelSize: 12
         }
