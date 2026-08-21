@@ -2,7 +2,7 @@ import json
 import os
 import urllib.request
 from datetime import date
-from praytimes import *
+from praytimes import PrayTimes
 
 CONFIG_DIR = os.path.expanduser("~/.config/omarchy/salted.adhan")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "config.json")
@@ -63,7 +63,8 @@ def get_coordinates():
 if __name__ == "__main__":
     script_date = date.today()
     coordinates = get_coordinates()
-    times = prayTimes.getTimes(script_date, coordinates, 1, 'Egypt')
+    pt = PrayTimes('Egypt')
+    times = pt.getTimes(script_date, coordinates, 1)
     
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "prayer_times.txt")
     with open(output_path, "w") as f:
