@@ -69,6 +69,7 @@ Panel {
       Text {
         Layout.fillWidth: true
         text: "Prayer Times"
+        textFormat: Text.PlainText
         color: bar ? bar.barForeground : "white"
         font.pixelSize: 18
         font.bold: true
@@ -78,6 +79,7 @@ Panel {
       Text {
         Layout.fillWidth: true
         text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
+        textFormat: Text.PlainText
         color: bar ? Qt.darker(bar.barForeground, 1.3) : "gray"
         font.pixelSize: 12
         horizontalAlignment: Text.AlignHCenter
@@ -101,6 +103,7 @@ Panel {
 
           Text {
             text: modelData
+            textFormat: Text.PlainText
             color: bar ? bar.barForeground : "white"
             font.pixelSize: 14
             Layout.fillWidth: true
@@ -108,6 +111,7 @@ Panel {
 
           Text {
             text: root.prayerTimes[index] || "--:--"
+            textFormat: Text.PlainText
             color: bar ? bar.barForeground : "white"
             font.pixelSize: 14
             font.bold: true
@@ -128,6 +132,7 @@ Panel {
         Text {
           anchors.centerIn: parent
           text: root.refreshing ? "Updating..." : "Refresh"
+          textFormat: Text.PlainText
           color: bar ? bar.barForeground : "white"
           font.pixelSize: 12
         }
