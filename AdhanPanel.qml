@@ -13,34 +13,32 @@ Panel {
   property var anchorItem: null
   property var hostWidget: null
   readonly property var barIdentity: hostWidget || root
+  readonly property color fg: bar ? bar.barForeground : Color.foreground
 
-  readonly property string scriptPath: Qt.resolvedUrl("prayer_times.py").toString().replace("file://", "")
-  readonly property string timesPath: Qt.resolvedUrl("prayer_times.txt").toString().replace("file://", "")
   property var prayerTimes: []
   property var prayerNames: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]
 
   Component.onCompleted: refreshTimes()
 
   function refreshTimes() {
-    refreshProc.running = true
+    scriptProc.running = true
   }
 
   Process {
-    id: refreshProc
-    command: ["python3", root.scriptPath]
+    id: scriptProc
+    command: ["python3", OmarchyPath + "/plugins/salted.adhan/prayer_times.py"]
     onExited: function(exitCode) {
-      if (exitCode === 0) readFileProc.running = true
+      if (exitCode === 0) readProc.running = true
     }
   }
 
   Process {
-    id: readFileProc
-    command: ["cat", root.timesPath]
+    id: readProc
+    command: ["cat", OmarchyPath + "/plugins/salted.adhan/prayer_times.txt"]
     stdout: StdioCollector {
       waitForEnd: true
       onStreamFinished: {
-        var lines = text.trim().split("\n")
-        root.prayerTimes = lines
+        root.prayerTimes = text.trim().split("\n")
       }
     }
   }
@@ -63,7 +61,7 @@ Panel {
       Text {
         Layout.fillWidth: true
         text: "Prayer Times"
-        color: root.barForeground
+        color: root.fg
         font.pixelSize: 18
         font.bold: true
         horizontalAlignment: Text.AlignHCenter
@@ -72,7 +70,7 @@ Panel {
       Text {
         Layout.fillWidth: true
         text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
-        color: Qt.darker(root.barForeground, 1.3)
+        color: Qt.darker(root.fg, 1.3)
         font.pixelSize: 12
         horizontalAlignment: Text.AlignHCenter
       }
@@ -82,7 +80,7 @@ Panel {
         Layout.topMargin: 4
         Layout.bottomMargin: 4
         height: 1
-        color: Qt.darker(root.barForeground, 1.5)
+        color: Qt.darker(root.fg, 1.5)
         opacity: 0.3
       }
 
@@ -95,14 +93,14 @@ Panel {
 
           Text {
             text: modelData
-            color: root.barForeground
+            color: root.fg
             font.pixelSize: 14
             Layout.fillWidth: true
           }
 
           Text {
             text: root.prayerTimes[index] || "--:--"
-            color: root.barForeground
+            color: root.fg
             font.pixelSize: 14
             font.bold: true
           }
@@ -115,14 +113,14 @@ Panel {
         Layout.fillWidth: true
         Layout.preferredHeight: 32
         radius: 6
-        color: refreshMouse.containsMouse ? Qt.darker(root.barForeground, 1.2) : "transparent"
-        border.color: Qt.darker(root.barForeground, 1.5)
+        color: refreshMouse.containsMouse ? Qt.darker(root.fg, 1.2) : "transparent"
+        border.color: Qt.darker(root.fg, 1.5)
         border.width: 1
 
         Text {
           anchors.centerIn: parent
           text: "Refresh"
-          color: root.barForeground
+          color: root.fg
           font.pixelSize: 12
         }
 
