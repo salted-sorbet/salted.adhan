@@ -45,82 +45,93 @@ Panel {
     }
   }
 
-  ColumnLayout {
-    anchors.fill: parent
-    anchors.margins: 16
-    spacing: 12
+  KeyboardPanel {
+    id: panel
+    anchorItem: root.anchorItem
+    owner: root.barIdentity
+    bar: root.bar
+    open: root.opened
+    centerOnBar: true
+    contentWidth: panel.fittedContentWidth(Style.space(280))
+    contentHeight: panel.fittedContentHeight(column.implicitHeight)
 
-    Text {
-      Layout.fillWidth: true
-      text: "Prayer Times"
-      color: root.foreground
-      font.pixelSize: 18
-      font.bold: true
-      horizontalAlignment: Text.AlignHCenter
-    }
-
-    Text {
-      Layout.fillWidth: true
-      text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
-      color: Qt.darker(root.foreground, 1.3)
-      font.pixelSize: 12
-      horizontalAlignment: Text.AlignHCenter
-    }
-
-    Rectangle {
-      Layout.fillWidth: true
-      Layout.topMargin: 4
-      Layout.bottomMargin: 4
-      height: 1
-      color: Qt.darker(root.foreground, 1.5)
-      opacity: 0.3
-    }
-
-    Repeater {
-      model: root.prayerNames
-
-      RowLayout {
-        Layout.fillWidth: true
-        spacing: 8
-
-        Text {
-          text: modelData
-          color: root.foreground
-          font.pixelSize: 14
-          Layout.fillWidth: true
-        }
-
-        Text {
-          text: root.prayerTimes[index] || "--:--"
-          color: root.foreground
-          font.pixelSize: 14
-          font.bold: true
-        }
-      }
-    }
-
-    Item { Layout.fillHeight: true }
-
-    Rectangle {
-      Layout.fillWidth: true
-      Layout.preferredHeight: 32
-      radius: 6
-      color: refreshMouse.containsMouse ? Qt.darker(root.foreground, 1.2) : "transparent"
-      border.color: Qt.darker(root.foreground, 1.5)
-      border.width: 1
+    ColumnLayout {
+      id: column
+      width: parent.width
+      spacing: 12
 
       Text {
-        anchors.centerIn: parent
-        text: "Refresh"
-        color: root.foreground
-        font.pixelSize: 12
+        Layout.fillWidth: true
+        text: "Prayer Times"
+        color: root.barForeground
+        font.pixelSize: 18
+        font.bold: true
+        horizontalAlignment: Text.AlignHCenter
       }
 
-      MouseArea {
-        id: refreshMouse
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked: root.refreshTimes()
+      Text {
+        Layout.fillWidth: true
+        text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
+        color: Qt.darker(root.barForeground, 1.3)
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignHCenter
+      }
+
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.topMargin: 4
+        Layout.bottomMargin: 4
+        height: 1
+        color: Qt.darker(root.barForeground, 1.5)
+        opacity: 0.3
+      }
+
+      Repeater {
+        model: root.prayerNames
+
+        RowLayout {
+          Layout.fillWidth: true
+          spacing: 8
+
+          Text {
+            text: modelData
+            color: root.barForeground
+            font.pixelSize: 14
+            Layout.fillWidth: true
+          }
+
+          Text {
+            text: root.prayerTimes[index] || "--:--"
+            color: root.barForeground
+            font.pixelSize: 14
+            font.bold: true
+          }
+        }
+      }
+
+      Item { Layout.fillHeight: true }
+
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 32
+        radius: 6
+        color: refreshMouse.containsMouse ? Qt.darker(root.barForeground, 1.2) : "transparent"
+        border.color: Qt.darker(root.barForeground, 1.5)
+        border.width: 1
+
+        Text {
+          anchors.centerIn: parent
+          text: "Refresh"
+          color: root.barForeground
+          font.pixelSize: 12
+        }
+
+        MouseArea {
+          id: refreshMouse
+          anchors.fill: parent
+          hoverEnabled: true
+          onClicked: root.refreshTimes()
+        }
       }
     }
   }
