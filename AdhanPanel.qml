@@ -45,12 +45,9 @@ Panel {
     }
   }
 
-  contentWidth: fittedContentWidth(Style.space(280))
-  contentHeight: fittedContentHeight(column.implicitHeight, Style.space(320))
-
   ColumnLayout {
-    id: column
-    width: parent.width
+    anchors.fill: parent
+    anchors.margins: 16
     spacing: 12
 
     Text {
